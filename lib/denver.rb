@@ -3,8 +3,8 @@ require_relative 'parser'
 class Denver
 
   def initialize
-    @data = Parser.new("./data/traffic-accidents.csv").parse_csv
-    @crime_data = Parser.new("./data/crime.csv").parse_crime_csv
+    @data = Parser.new.parse_csv("./data/traffic-accidents.csv", :incident_address, :neighborhood_id)
+    @data = Parser.new.parse_csv("./data/crime.csv", :neighborhood_id)
   end
 end
 

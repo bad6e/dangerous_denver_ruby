@@ -3,29 +3,14 @@ require 'pry'
 require_relative 'dangerous_sorter'
 
 class Parser
-
-  def initialize(filename)
-    @filename = filename
-  end
-
-  def parse_csv
-    neighborhood = []
-    address = []
-    CSV.foreach(@filename,:headers => true, :header_converters => :symbol,
-    :converters => :numeric) do |row|
-      neighborhood << row[:neighborhood_id]
-      address << row[:incident_address]
+  def parse_csv(filename, attribute_one = nil, attribute_two = nil)
+    information_one = []
+    information_two = []
+    CSV.foreach(filename,:headers => true, :header_converters => :symbol) do |row|
+      information_one << row[attribute_one]
+      information_two << row[attribute_two]
     end
-    DangerousSorter.new(address.compact)
-    DangerousSorter.new(neighborhood.compact)
-  end
-
-  def parse_crime_csv
-    crime = []
-    CSV.foreach(@filename,:headers => true, :header_converters => :symbol,
-    :converters => :numeric) do |row|
-      crime << row[:neighborhood_id]
-    end
-    DangerousSorter.new(crime.compact)
+    DangerousSorter.new(information_one.compact)
+    DangerousSorter.new(information_two.compact)
   end
 end
