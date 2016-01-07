@@ -1,5 +1,4 @@
 require_relative 'parser'
-require 'pry'
 
 class Denver
 
