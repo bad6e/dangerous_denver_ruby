@@ -17,7 +17,7 @@ class Parser
       address << row[:incident_address]
     end
 
-    DangerousSorter.new(neighborhood)
-    DangerousSorter.new(address)
+    DangerousSorter.new(neighborhood.compact)
+    DangerousSorter.new(address.compact)
   end
 end
