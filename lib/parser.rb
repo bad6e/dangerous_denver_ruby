@@ -16,8 +16,16 @@ class Parser
       neighborhood << row[:neighborhood_id]
       address << row[:incident_address]
     end
-
-    DangerousSorter.new(neighborhood.compact)
     DangerousSorter.new(address.compact)
+    DangerousSorter.new(neighborhood.compact)
+  end
+
+  def parse_crime_csv
+    crime = []
+    CSV.foreach(@filename,:headers => true, :header_converters => :symbol,
+    :converters => :numeric) do |row|
+      crime << row[:neighborhood_id]
+    end
+    DangerousSorter.new(crime.compact)
   end
 end
